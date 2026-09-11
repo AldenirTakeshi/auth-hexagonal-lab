@@ -5,9 +5,11 @@ import com.takeshi.auth_hexagonal_lab.application.ports.out.PasswordEncoderPort;
 import com.takeshi.auth_hexagonal_lab.application.ports.out.UserRepositoryPort;
 import com.takeshi.auth_hexagonal_lab.domain.exception.EmailAlreadyRegisterException;
 import com.takeshi.auth_hexagonal_lab.domain.model.User;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class RegisterUserService implements RegisterUserUseCase{
 
     private final PasswordEncoderPort passwordEncoderPort;
