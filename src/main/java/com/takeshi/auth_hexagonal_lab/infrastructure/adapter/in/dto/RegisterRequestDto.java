@@ -1,7 +1,8 @@
 package com.takeshi.auth_hexagonal_lab.infrastructure.adapter.in.dto;
 
-public record UserResponseDto(
-        String id,
+public record RegisterRequestDto(
         String name,
-        String email
-) { }
+        String email,
+        String password
+) {
+}
