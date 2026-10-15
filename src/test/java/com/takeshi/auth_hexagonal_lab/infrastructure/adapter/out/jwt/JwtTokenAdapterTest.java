@@ -21,12 +21,12 @@ public class JwtTokenAdapterTest {
     private JwtTokenAdapter jwtTokenAdapter;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         jwtTokenAdapter = new JwtTokenAdapter(TEST_SECRET, TEST_EXPIRATION_MS);
     }
 
     @Test
-    void deveGerarTokenVazio(){
+    void deveGerarTokenVazio() {
         User user = new User("1", "Takeshi", "takeshi@gmail.com", "senha-hash");
 
         String token = jwtTokenAdapter.generateToken(user);
@@ -36,7 +36,7 @@ public class JwtTokenAdapterTest {
     }
 
     @Test
-    void tokenDeveTerFormatoJwtValido(){
+    void tokenDeveTerFormatoJwtValido() {
         User user = new User("1", "Takeshi", "takeshi@gmail.com", "senha-hash");
 
         String token = jwtTokenAdapter.generateToken(user);
@@ -46,8 +46,9 @@ public class JwtTokenAdapterTest {
     }
 
     @Test
-    void tokenDeveConterEmailComoSubject(){
-        User user = new User("42", "maria", "maria@gmail.com", "senha-hash");
+    void tokenDeveConterEmailComoSubject() {
+
+        User user = new User("42", "maria", "maria@gmail.com", "123456");
 
         String token = jwtTokenAdapter.generateToken(user);
 
@@ -65,7 +66,7 @@ public class JwtTokenAdapterTest {
     }
 
     @Test
-    void tokenDeveExpirarNoFuturo(){
+    void tokenDeveExpirarNoFuturo() {
         User user = new User("1", "Takeshi", "takeshi@gmail.com", "senha-hash");
 
         String token = jwtTokenAdapter.generateToken(user);

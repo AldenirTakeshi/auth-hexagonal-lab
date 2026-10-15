@@ -2,6 +2,7 @@ package com.takeshi.auth_hexagonal_lab.infrastructure.adapter.out.jwt;
 
 import com.takeshi.auth_hexagonal_lab.application.ports.out.TokenProviderPort;
 import com.takeshi.auth_hexagonal_lab.domain.model.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -17,7 +18,7 @@ public class JwtTokenAdapter implements TokenProviderPort {
     private final SecretKey secret;
     private final long expirationMs;
 
-    public JwtTokenAdapter(@Value("${app.jwt.secret}") String secret,@Value("${app.jwt.expiration-ms}") long expirationMs) {
+    public JwtTokenAdapter(@Value("${app.jwt.secret}") String secret, @Value("${app.jwt.expiration-ms}") long expirationMs) {
         this.secret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
         this.expirationMs = expirationMs;
     }
@@ -34,5 +35,16 @@ public class JwtTokenAdapter implements TokenProviderPort {
                 .expiration(expiryDate)
                 .signWith(secret)
                 .compact();
+    }
+
+    @Override
+    public String validateTokenAndGetSubject(String token) {
+        Claims claims = Jwts.parser()
+                .verifyWith(secret)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        return claims.getSubject();
     }
 }
