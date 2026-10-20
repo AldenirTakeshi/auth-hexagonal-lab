@@ -4,5 +4,5 @@ spring:
 
 app:
   jwt:
-    secret: mV1pZ8bLz44LS4f0ZHXq84cI0Lz0XaGG74SHvQGbGjw=
+    secret: ${JWT_SECRET}
     expiration-ms: 3600000

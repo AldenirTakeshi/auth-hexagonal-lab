@@ -32,7 +32,7 @@ public class LoginServiceTest {
     private LoginService loginService;
 
     @Test
-    void deveRetornarTokenQuandoCrendeciaisValidas(){
+    void deveRetornarTokenQuandoCredenciaisValidas(){
         User user = new User("1", "Takeshi", "takeshi@gmail.com", "hash-da-senha");
         when(userRepositoryPort.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
         when(passwordEncoderPort.matches("12345", user.getPassword())).thenReturn(true);
@@ -51,7 +51,7 @@ public class LoginServiceTest {
     }
 
     @Test
-    void deveRetornarSenhaErrada(){
+    void deveLancarExcecaoQuandoSenhaErrada(){
         User user = new User("1", "Takeshi", "takeshi@gmail.com", "hash-da-senha");
 
         when(userRepositoryPort.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
