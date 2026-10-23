@@ -1,6 +1,15 @@
 spring:
   application:
     name: auth-hexagonal-lab
+  datasource:
+    url: jdbc:postgresql://localhost:5432/authlab
+    username: authlab
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+  config:
+    import: optional:file:.env[.properties]
 
 app:
   jwt:
